@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>интернетвалентинкаахренеть</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="ribbons">
+      <img src="https://media.tenor.com/l9Y_Ya6tAAIAAAAi/ribbon-cute.gif" alt="">
+      <img src="https://media.tenor.com/l9Y_Ya6tAAIAAAAi/ribbon-cute.gif" alt="">
+      <img src="https://media.tenor.com/l9Y_Ya6tAAIAAAAi/ribbon-cute.gif" alt="">
+      <img src="https://media.tenor.com/l9Y_Ya6tAAIAAAAi/ribbon-cute.gif" alt="">
+      <img src="https://media.tenor.com/l9Y_Ya6tAAIAAAAi/ribbon-cute.gif" alt="">
+      <img src="https://media.tenor.com/l9Y_Ya6tAAIAAAAi/ribbon-cute.gif" alt="">
+    </div>
+    <div class="hearts">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="screen">
+      <main class="hero">
+        <p class="tagline">You're the sweetest part of my days  =)</p>
+      </main>
+
+      <section class="photo">
+        <figure class="frame">
+          <img src="photo_2025-11-23_23-21-27.jpg" alt="Portrait" loading="lazy">
+          <h1 class="overlay-title">Би май валентин</h1><br>
+        </figure>
+      </section>
+
+      <section class="note" id="note">
+        <div class="card">
+          <h2>♥‿♥</h2>
+          <p>Я еще не встречал такую <span id="adj"></span> девушку</p>
+          <p class="signature">— Сама знаешь кто))</p>
+        </div>
+      </section>
+
+      <section class="cta">
+        <img class="gif" src="https://media1.tenor.com/m/kutFNFXxSIsAAAAd/minion-minion-loves.gif" alt="">
+        <p class="question">Will you be my valentine?</p>
+        <div class="actions">
+          <button id="yesBtn" class="pill yes">yes</button>
+          <button id="noBtn" class="pill no">no</button>
+        </div>
+      </section>
+    </div>
+    <script>
+      const yes = document.getElementById('yesBtn');
+      const no = document.getElementById('noBtn');
+      const actions = document.querySelector('.actions');
+      let s = 1;
+      function randPos(el){
+        if(!actions) return;
+        const rect = actions.getBoundingClientRect();
+        const ew = el.offsetWidth || 80;
+        const eh = el.offsetHeight || 40;
+        const maxX = Math.max(0, rect.width - ew);
+        const maxY = Math.max(0, rect.height - eh);
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+      }
+      yes?.addEventListener('click', () => {
+        window.location.href = 'yes.html';
+      });
+      no?.addEventListener('click', () => {
+        s *= 1.35;
+        yes.style.transform = `scale(${s})`;
+        yes.style.zIndex = '999';
+        yes.style.position = 'absolute';
+        const r = yes.getBoundingClientRect();
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        if (r.width > vw * 0.9 || r.height > vh * 0.85) {
+          yes.style.position = 'fixed';
+          yes.style.inset = '0';
+          yes.style.margin = 'auto';
+          yes.style.width = '100vw';
+          yes.style.height = '100vh';
+          yes.style.borderRadius = '0';
+          yes.style.transform = 'none';
+          yes.style.fontSize = '10vw';
+          yes.style.letterSpacing = '2px';
+          yes.style.zIndex = '9999';
+        }
+        randPos(yes);
+        randPos(no);
+      });
+      const mood = document.querySelector('#note .card h2');
+      if(mood){
+        let flip = false;
+        setInterval(()=>{
+          flip = !flip;
+          mood.textContent = flip ? '-‿-' : '♥‿♥';
+        }, 800);
+      }
+      const adjSpan = document.getElementById('adj');
+      if(adjSpan){
+        const words = ['милую','умную','красивую','яркую','добрую','талантливую','неповторимую','вдохновляющую', 'необыкновенную'];
+        let i = 0;
+        adjSpan.textContent = words[i];
+        setInterval(()=>{
+          i = (i + 1) % words.length;
+          adjSpan.textContent = words[i];
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
